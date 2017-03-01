@@ -89,3 +89,15 @@ Queue threshold
 Each node is deployed in one or more locations. A location is uniquely specified by an infrastructure host and a resource pool. The first is responsible for routing the data stream inputs while the second is the identifier of the (cloud) resource pool where the operator is actually executed.
 
 # Processing Node
+
+# Runtime
+
+...
+
+## Web GUI
+
+...
+
+If you want to be able to view the current topology as an image of a directed graph, you need to have the "dot" application available at /usr/bin/dot". This can easily be installed in Ubuntu using the following command:
+
+`apt-get install graphviz`

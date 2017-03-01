@@ -2,6 +2,38 @@
 layout: license
 ---
 
+# Acknowledgements
+
+
+<div class="panel panel-default text-center">
+  <div class="panel-heading">Research Projects</div>
+  <div class="panel-body">
+<div class="row">
+  <div class="col-md-4 text-center">
+    <a href="http://simpli-city.eu/"><img src="./img/simple_city_logo.jpg" width="250px" /></a><br /><br />
+<small>
+    This project has received funding from the European Union's FP7 research and innovation programme under grant agreement No 318201.
+</small>
+  </div>
+  <div class="col-md-4 text-center">
+  <a href="http://tuwien.ac.at"><img src="./img/TU_logo.png" width="150px" /></a><br /><br />
+<small>
+  This project has received funding from TU Wien as an Innovative Project.
+  </small>
+  </div>
+  <div class="col-md-4 text-center">
+  <a href="http://www.crema-project.eu/"><img src="./img/crema-logo.png"  width="80px" /></a><br /><br />
+<small>
+  This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 637066.
+  </small>
+  </div>
+</div> 
+ </div>
+</div>
+
+
+
+
 # License
 
 Apache License
@@ -206,10 +238,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-# Credits
-
-The development of VISP would not have been possible without the generous funding from our partners:
-
-<a href="http://simpli-city.eu/press-information.html"><img src="./img/simple_city_logo.gif" width="300px" /></a><br /><br />
-<a href="http://www.crema-project.eu/"><img src="./img/crema-logo.png" /></a><br /><br />
-<a href="http://tuwien.ac.at"><img src="./img/TU_logo.png" width="200px" /></a>

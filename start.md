@@ -56,7 +56,19 @@ Create a copy of the *credential.sample.properties* and store it as *credential.
 
 TBD
 
+## Required Software
+
+TBD: install maven + java
+
+If you want to be able to view the current topology as an image of a directed graph, you need to have the "dot" application available at /usr/bin/dot". This can easily be installed in Ubuntu using the following command:
+
+`apt-get install graphviz`
+
+
+
 # Run VISP
+
+
 
 ```
 mvn spring-boot:run

@@ -4,12 +4,28 @@ layout: components
 
 The VISP Ecosystem consists of two major components: the VISP Marketplace and the VISP Runtime. The VISP Marketplace aims at creating an ecosystem for IoT-based topologies by minimizing the required effort for the user to design a topology. The VISP Runtime complements the VISP Marketplace, by providing a platform to execute the previously designed topologies.
 
-Both modules are presented in more detail in the following sections.
+# Architecture
+
+TBD
 
 
-# Reasoner
+# Runtime
 
-# Topology Parser
+TBD
+
+## Web GUI
+
+TBD
+
+## Resource Provider
+
+TBD
+
+## Reasoner
+
+TBD
+
+## Topology Parser
 
 The VISP topology parser is used to make sense of input files in the **VISP topology description language** format. Such files are either created manually by the user (or by the Topology Builder in the VISP Marketplace) or they can be generated automatically by the VISP Runtime in the process of executing topology updates at runtime.
 
@@ -84,20 +100,15 @@ Memory threshold
 * `queueThreshold`<br />
 Queue threshold
 
-## Locations
+### Locations
 
 Each node is deployed in one or more locations. A location is uniquely specified by an infrastructure host and a resource pool. The first is responsible for routing the data stream inputs while the second is the identifier of the (cloud) resource pool where the operator is actually executed.
 
-# Processing Node
 
-# Runtime
+# Processing Nodes
 
-...
+TBD
 
-## Web GUI
+# Data Provider
 
-...
-
-If you want to be able to view the current topology as an image of a directed graph, you need to have the "dot" application available at /usr/bin/dot". This can easily be installed in Ubuntu using the following command:
-
-`apt-get install graphviz`
+TBD

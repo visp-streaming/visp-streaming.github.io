@@ -4,27 +4,81 @@ layout: publications
 
 # Publications
 
-The following publications have been published about VISP:
 
-```
-VISP: An Ecosystem for Elastic Data Stream Processing for the Internet of Things
-Christoph Hochreiner, Michael Vögler, Philipp Waibel and Schahram Dustdar
-20th Int. Enterprise Distributed Object Computing Conf. (EDOC), 2016
-```
-[Paper](http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/EDOC2016.pdf) |
-[Presentation](https://speakerdeck.com/chochreiner/visp-an-ecosystem-for-elastic-data-stream-processing-for-the-internet-of-things) | [Bibtex](http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/bibtex/hochreiner2016edoc.bib) 
+<div class="panel panel-default">
+  <div class="panel-body">
+Hochreiner, Christoph. "VISP Testbed-A Toolkit for Modeling and Evaluating Resource Provisioning Algorithms for Stream Processing Applications." ZEUS 2017, pp. NN-NN.
+</div>
+  <div class="panel-footer text-center ">
+  <div class="btn-group" role="group" >
+  <button type="button" class="btn btn-default">
+  <a href="http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/2017_ZEUS.pdf">
+  <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Paper </a></button>
+  <button type="button" class="btn btn-default">
+  <a href="https://speakerdeck.com/chochreiner/visp-testbed-a-toolkit-for-modeling-and-evaluating-resource-provisioning-algorithms-for-stream-processing-applications"> 
+  <span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Presentation</a></button>
+  <button type="button" class="btn btn-default">
+  <a href="http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/bibtex/hochreiner2017zeus.bib"> 
+  <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Bibtex</a></button>
+</div>
+</div>
+</div>
 
-```
-Elastic Stream Processing for the Internet of Things
-Christoph Hochreiner, Michael Vögler, Stefan Schulte and Schahram Dustdar
-9th Int. Conf. on Cloud Computing (CLOUD), 2016
-```
-[Paper](http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/IEEECloud2016.pdf) | 
-[Presentation](https://speakerdeck.com/chochreiner/elastic-stream-processing-for-the-internet-of-things) | [Bibtex](http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/bibtex/hochreiner2016cloud.bib) 
 
-```
-Elastic Stream Processing for Distributed Environments
-Christoph Hochreiner, Stefan Schulte, Schahram Dustdar and Freddy Lecue
-IEEE Internet Computing, Volume 19, Number 6, pages 54-59, 2015
-```
-[Paper](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7307896) | [Bibtex](http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/bibtex/hochreiner2015ic.bib) 
+<div class="panel panel-default">
+  <div class="panel-body">
+Hochreiner, Christoph, Michael Vogler, Philipp Waibel, and Schahram Dustdar. "VISP: An Ecosystem for Elastic Data Stream Processing for the Internet of Things." In Enterprise Distributed Object Computing Conference (EDOC), 2016 IEEE 20th International, pp. 1-11. IEEE, 2016.
+</div>
+  <div class="panel-footer text-center ">
+  <div class="btn-group" role="group" >
+  <button type="button" class="btn btn-default">
+  <a href="http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/EDOC2016.pdf">
+  <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Paper </a></button>
+  <button type="button" class="btn btn-default">
+  <a href="https://speakerdeck.com/chochreiner/visp-an-ecosystem-for-elastic-data-stream-processing-for-the-internet-of-things"> 
+  <span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Presentation</a></button>
+  <button type="button" class="btn btn-default">
+  <a href="http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/bibtex/hochreiner2016edoc.bib"> 
+  <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Bibtex</a></button>
+</div>
+</div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+Hochreiner, Christoph, Michael Vögler, Stefan Schulte, and Schahram Dustdar. "Elastic Stream Processing for the Internet of Things." In International Conference on Cloud Computing (CLOUD), pp. 100-107. 2016.
+</div>
+  <div class="panel-footer text-center ">
+  <div class="btn-group" role="group" >
+  <button type="button" class="btn btn-default">
+  <a href="http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/IEEECloud2016.pdf">
+  <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Paper </a></button>
+  <button type="button" class="btn btn-default">
+  <a href="https://speakerdeck.com/chochreiner/elastic-stream-processing-for-the-internet-of-things"> 
+  <span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Presentation</a></button>
+  <button type="button" class="btn btn-default">
+  <a href="http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/bibtex/hochreiner2016cloud.bib"> 
+  <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Bibtex</a></button>
+</div>
+</div>
+</div>
+
+
+<div class="panel panel-default">
+  <div class="panel-body">
+Hochreiner, Christoph, Stefan Schulte, Schahram Dustdar, and Freddy Lecue. "Elastic Stream Processing for Distributed Environments." IEEE Internet Computing 19, no. 6 (2015): 54-59.
+</div>
+  <div class="panel-footer text-center ">
+  <div class="btn-group" role="group" >
+  <button type="button" class="btn btn-default">
+  <a href="http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/EDOC2016.pdf">
+  <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Paper </a></button>
+  <button type="button" class="btn btn-default">
+  <a href="http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/bibtex/hochreiner2015ic.bib"> 
+  <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Bibtex</a></button>
+</div>
+</div>
+</div>  
+
+
+

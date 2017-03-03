@@ -2,6 +2,14 @@
 layout: license
 ---
 
+# Contact
+Christoph Hochreiner, Distributed Systems Group, TU Wien
+
+<a href="mailto:c.hochreiner@infosys.tuwien.ac.at"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> c.hochreiner@infosys.tuwien.ac.at</a>
+
+<a href="http://www.infosys.tuwien.ac.at/staff/hochreiner/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> http://www.infosys.tuwien.ac.at/staff/hochreiner/</a>
+
+
 # Acknowledgements
 
 

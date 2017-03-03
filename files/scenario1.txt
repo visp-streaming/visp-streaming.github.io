@@ -1,0 +1,39 @@
+
+$step2 = Operator($step1) {
+ allowedLocations = 128.130.172.181/openstackpool,
+ inputFormat      = step1,
+ type             = "step2",
+ outputFormat     = "step3",
+ size             = small,
+ stateful         = true,
+ expectedDuration = 15,
+ scalingCPUThreshold = 20,
+ scalingMemoryThreshold = 55,
+ queueThreshold = 11
+}
+
+
+$log = Sink($step2) {
+ concreteLocation = 128.130.172.181/openstackpool,
+ inputFormat      = "transformed data from step 5",
+ type             = "log-type operator",
+}
+
+$step1 = Operator($source) {
+ allowedLocations = 128.130.172.224/openstackpool,
+ concreteLocation = 128.130.172.224/openstackpool,
+ inputFormat      = step1,
+ type             = step1,
+ outputFormat     = step2,
+ size             = small,
+ stateful = false
+}
+
+$source = Source() {
+ concreteLocation = 128.130.172.181/openstackpool,
+ type             = source,
+ outputFormat     = "temperature data from sensor XYZ",
+ #meaningless for sources and should be ignored by parser:
+ expectedDuration = 15,
+ size = small
+}

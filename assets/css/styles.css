@@ -1,4 +1,4 @@
-/*   
+/*
  * Template Name: PrettyDocs - Responsive Website Template for documentations
  * Version: 1.0
  * Author: Xiaoying Riley
@@ -493,7 +493,7 @@ h3 {
 .doc-section h1 {
   font-size: 24px;
   font-weight: bold;
-  border-bottom: none;  
+  border-bottom: none;
 }
 .doc-section h2 {
   font-size: 22px;
@@ -1295,3 +1295,12 @@ h3 {
 /* Small devices (tablets, 768px and up) */
 /* Medium devices (desktops, 992px and up) */
 /* Large devices (large desktops, 1200px and up) */
+
+div > .highlighter-rouge {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+h2 {
+  margin-top: 25px;
+}

@@ -8,28 +8,28 @@ layout: quickstart
 # Download
 
 <div class="section-block">
-If you are interested in the source code, download it from GitHub: <br /><br />
 
 <a class="btn btn-primary btn-cta" href="https://github.com/visp-streaming/runtime">
-<i class="fa fa-cloud-download"></i> VISP Runtime</a></div>
+<i class="fa fa-cloud-download"></i> Download the source code  from GitHub</a></div>
 
 
 # Infrastructure Host
 
 Let's start with the infrastructure host. This is the machine where the RabbitMQ, MySQL and Redis services will be running. Make sure that docker is installed and configured on that machine and run the following commands to set everything up:
 
+<!--
 <div class="callout-block callout-info">
 <div class="icon-holder">
 <i class="fa fa-info-circle"></i>
-</div><!--//icon-holder-->
+</div>
 <div class="content">
 <h4 class="callout-title">Info</h4>
 <p>
 <code class="highlighter-rouge">--net="host"</code> specifies that the runtime has direct access to the containers via their ports
 </p>
-</div><!--//content-->
 </div>
-
+</div>
+-->
 
 ### Start Redis
 ```
@@ -47,68 +47,10 @@ docker run --net="host" -d --name rabbitmq -e RABBITMQ_DEFAULT_USER=visp -e RABB
 docker run --net="host" -d --name mysql -e MYSQL_ROOT_PASSWORD=visp -e MYSQL_DATABASE=visp -p 3306:3306 mysql
 ```
 
-# Configure VISP
+# Configuration
 
 Before the VISP runtime can be executed, two configuration files must be modified
 
-## Credentials
-
-Make a copy of the `credential.sample.properties` file and name it `credential.properties`. The following credentials must be specified:
-
-
-<table class="table">
-  <thead>
-      <tr>
-          <th>Property</th>
-          <th>Value</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <th scope="row">os.auth.url</th>
-          <td>URL of OpenStack, e.g. `http://openstack.infosys.tuwien.ac.at/identity/v2.0`</td>
-      </tr>
-			<tr>
-          <th scope="row">os.tenant.id</th>
-          <td>OpenStack Tenant ID (get it from Settings > OpenStack API)</td>
-      </tr>
-			<tr>
-          <th scope="row">os.tenant.name</th>
-          <td>The name of the OpenStack project</td>
-      </tr>
-			<tr>
-          <th scope="row">os.username</th>
-          <td>OpenStack username</td>
-      </tr>
-			<tr>
-          <th scope="row">os.password</th>
-          <td>OpenStack password</td>
-      </tr>
-			<tr>
-          <th scope="row">os.keypair.name</th>
-          <td>Name of the SSH keypair</td>
-      </tr>
-			<tr>
-          <th scope="row">spring.datasource.username</th>
-          <td>root</td>
-      </tr>
-			<tr>
-          <th scope="row">spring.datasource.password</th>
-          <td>visp</td>
-      </tr>
-			<tr>
-          <th scope="row">spring.rabbitmq.username</th>
-          <td>visp</td>
-      </tr>
-			<tr>
-          <th scope="row">spring.rabbitmq.password</th>
-          <td>visp</td>
-      </tr>
-
-  </tbody>
-</table>
-
-The spring credentials for the database and rabbitmq can be kept the same if no changes were made during the container deployment process in the setup of the infrastructure host.
 
 ## Application Properties
 
@@ -134,7 +76,62 @@ Similarly, the following configurations must be set in this file:
   </tbody>
 </table>
 
-# Running VISP in a docker container
+## Credentials
+
+Make a copy of the `credential.sample.properties` file and name it `credential.properties`. The following credentials must be specified:
+
+
+<table class="table">
+  <thead>
+      <tr>
+          <th>Property</th>
+          <th>Value</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <th scope="row">os.auth.url</th>
+          <td>&lt;URL of OpenStack, e.g. `http://openstack.infosys.tuwien.ac.at/identity/v2.0`&gt;</td>
+      </tr>
+			<tr>
+          <th scope="row">os.tenant.name</th>
+          <td>&lt;The name of the OpenStack project&gt;</td>
+      </tr>
+			<tr>
+          <th scope="row">os.username</th>
+          <td>&lt;OpenStack username&gt;</td>
+      </tr>
+			<tr>
+          <th scope="row">os.password</th>
+          <td>&lt;OpenStack password&gt;</td>
+      </tr>
+			<tr>
+          <th scope="row">os.keypair.name</th>
+          <td>&lt;Name of an available SSH keypair&gt;</td>
+      </tr>
+			<tr>
+          <th scope="row">spring.datasource.username</th>
+          <td>root</td>
+      </tr>
+			<tr>
+          <th scope="row">spring.datasource.password</th>
+          <td>visp</td>
+      </tr>
+			<tr>
+          <th scope="row">spring.rabbitmq.username</th>
+          <td>visp</td>
+      </tr>
+			<tr>
+          <th scope="row">spring.rabbitmq.password</th>
+          <td>visp</td>
+      </tr>
+
+  </tbody>
+</table>
+
+The spring credentials for the database and rabbitmq can be kept the same if no changes were made during the container deployment process in the setup of the infrastructure host.
+
+# Run VISP
 
 The easiest way to run VISP is by using a docker image.
 
@@ -167,12 +164,24 @@ The first command is used to log into your dockerhub account. Then the maven pro
 Once the image has been successfully pushed to the dockerhub repository, the following command can be used to run a docker container based on the pushed image:
 
 ```
-docker run --net="host" -e "VISP_RUNTIME_IP={runtime-ip}" -e "VISP_INFRASTRUCTURE_IP={infrastructure-ip}" -e "SPRING_RABBITMQ_HOST={infrastructure-ip}" -e "SPRING_DATASOURCE_URL=jdbc:mysql://{infrastructure-ip}:3306/visp?verifyServerCertificate=false&useSSL=false&requireSSL=false" -d --name vispruntime {dockerhub-username}/{dockerhub-repository}
+docker run --net="host" -e "VISP_RUNTIME_IP={runtime-ip}" -e "VISP_INFRASTRUCTURE_IP={infrastructure-ip}" -d --name vispruntime {dockerhub-username}/{dockerhub-repository}
 ```
 
 Setting the IPs correctly is critical: `VISP_RUNTIME_IP` is the public IP of the VISP runtime. This is also the IP that is used in the configuration file to distinguish different runtimes. In practise, it is the IP of the OpenStack instance where the above command is executed. All the other IPs must be set to `127.0.0.1` if deployment is done via docker on OpenStack. The reasons is that OpenStack instances cannot access themselves by their own public IPs (at least in our version).
 
-# Configure Resource Pools
+
+<!--
+# Run VISP
+
+```
+mvn spring-boot:run
+```
+-->
+
+
+# Setup VISP
+
+## Resource Pools
 
 Once the infrastructure host is up and running, a resource pool needs to be created. Resource pools are basically cloud computing instances where docker containers are executed. Open the web interface of the infrastructure host (`http://<visp.infrastructure.ip>:8080/`) and navigate to <b>Resource Pools</b>. Initially, there should be no entries. Create a new pool by clickin on the <b>Add new pooled VM</b> button and specify a name, an instance flavour and a cost. The name is an identifier and is also used in the topology config file to distinguish different pools on the same runtime instance. The flavour reflects the amount of computational resources available and basically limits how many operators can be deployed at the same time. The cost value is currently not used.
 
@@ -181,7 +190,7 @@ Once the infrastructure host is up and running, a resource pool needs to be crea
 <a class="mask" href="img/quickstart/resourcepools.png" data-title="Add new resource pool" data-toggle="lightbox"><i class="icon fa fa-search-plus"></i></a>
 </div>
 
-# Upload a Topology
+## Deploy Topology
 
 Topology files are used to describe which processing nodes should be deployed and how they should be connected. In order to upload a topology file, navigate to the web interface of the infrastructure host (`http://<visp.infrastructure.ip>:8080/`) and select <b>Change Topology</b>. There you can upload a new topology file and see which topology is currently active. If the nodes should be deployed on multiple VISP runtime instances, just upload the topology on one runtime instance - VISP's distributed update process will take care of the rest and update the other runtime instances accordingly.
 
@@ -197,41 +206,19 @@ Importantly, the IP addresses of the VISP runtimes need to be adjusted. In both 
 The above figure shows the result of a topology update where six operators (one source, one sink, four processing operators) are deployed on two different VISP runtime instances. The automatically generated graphic shows the runtime instance and resource pool where each operator is deployed.
 
 
-# Run VISP
-
-
-
-```
-mvn spring-boot:run
-
-```
-
-# Setup VISP
-
-## Resource Pools
-
-TBD
-
-## Deploy Topology
-
-TBD
-
 # Data Provider
 
 ## Download
 
 <div class="section-block">
-You can run VISP by downloading the source code from github: <br /><br />
-
 	<a class="btn btn-primary btn-cta" href="https://github.com/visp-streaming/dataProvider" target="_blank">
-	<i class="fa fa-cloud-download"></i> VISP DataProvider</a>
+	<i class="fa fa-cloud-download"></i>Download VISP DataProvider from Github</a>
 </div>
 
 ## Run Data Provider
 
 ```
 mvn spring-boot:run
-
 ```
 
 ## Stream Data

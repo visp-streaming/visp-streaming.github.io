@@ -50,14 +50,17 @@ a:focus {
   text-decoration: none;
 }
 code {
-  background: #222;
+/*  background: #444444;
   color: #fff;
   font-size: 14px;
   font-weight: bold;
+*/  
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  padding: 2px 8px;
+  
+/*  padding: 2px 4px;
   padding-top: 4px;
   display: inline-block;
+  */
 }
 .btn,
 a.btn {

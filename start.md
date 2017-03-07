@@ -172,6 +172,15 @@ docker run --net="host" -e "VISP_RUNTIME_IP={runtime-ip}" -e "VISP_INFRASTRUCTUR
 
 Setting the IPs correctly is critical: `VISP_RUNTIME_IP` is the public IP of the VISP runtime. This is also the IP that is used in the configuration file to distinguish different runtimes. In practise, it is the IP of the OpenStack instance where the above command is executed. All the other IPs must be set to `127.0.0.1` if deployment is done via docker on OpenStack. The reasons is that OpenStack instances cannot access themselves by their own public IPs (at least in our version).
 
+# Running VISP from Source
+
+You can also download the VISP source code and run it directly via Maven. After configuring the two properties files as described above, run the following maven command in the project root:
+
+```
+mvn spring-boot:run
+```
+
+
 # Configure Resource Pools
 
 Once the infrastructure host is up and running, a resource pool needs to be created. Resource pools are basically cloud computing instances where docker containers are executed. Open the web interface of the infrastructure host (`http://<visp.infrastructure.ip>:8080/`) and navigate to <b>Resource Pools</b>. Initially, there should be no entries. Create a new pool by clickin on the <b>Add new pooled VM</b> button and specify a name, an instance flavour and a cost. The name is an identifier and is also used in the topology config file to distinguish different pools on the same runtime instance. The flavour reflects the amount of computational resources available and basically limits how many operators can be deployed at the same time. The cost value is currently not used.
@@ -196,47 +205,53 @@ Importantly, the IP addresses of the VISP runtimes need to be adjusted. In both 
 
 The above figure shows the result of a topology update where six operators (one source, one sink, four processing operators) are deployed on two different VISP runtime instances. The automatically generated graphic shows the runtime instance and resource pool where each operator is deployed.
 
+# Testing VISP
 
-# Run VISP
-
-
-
-```
-mvn spring-boot:run
-
-```
-
-# Setup VISP
-
-## Resource Pools
-
-TBD
-
-## Deploy Topology
-
-TBD
-
-# Data Provider
+In order to evaluate whether the set up topology is actually working properly, we have developed the <b>VISP Data Provider</b> tool. This tool allows automatically generating input data for a configurable VISP runtime instance.
 
 ## Download
 
 <div class="section-block">
-You can run VISP by downloading the source code from github: <br /><br />
+You can download the source code from Github: <br /><br />
 
 	<a class="btn btn-primary btn-cta" href="https://github.com/visp-streaming/dataProvider" target="_blank">
-	<i class="fa fa-cloud-download"></i> VISP DataProvider</a>
+	<i class="fa fa-cloud-download"></i> VISP Data Provider</a>
 </div>
 
 ## Run Data Provider
 
+The data provider can be executed by running the following maven command
+
 ```
 mvn spring-boot:run
-
 ```
 
 ## Stream Data
 
-TBD
+Before the data stream can be started, the configuration has to be adapted. Navigate to the VISP Data Provider web interface: `http://localhost:8090/`
+
+
+<div class="screenshot-holder">
+<a href="img/quickstart/dataprovider.png" data-title="Configure Data Provider" data-toggle="lightbox"><img class="img-responsive" src="img/quickstart/dataprovider.png" alt="Configure Data Provider"></a>
+<a class="mask" href="img/quickstart/dataprovider.png" data-title="Configure Data Provider" data-toggle="lightbox"><i class="icon fa fa-search-plus"></i></a>
+</div>
+
+
+There, enter the public URI of the VISP Runtime where the target source operator is located. E.g., if the source that should be addressed is deployed at a VISP runtime `128.130.172.222`, enter that IP.
+
+Username and password are the credentials for the rabbitmq server that were set during the docker deployment of the infrastructure host.
+
+## Observe the Data Processing
+
+To see whether the generated data is processed correctly, you can open the rabbitmq web interface on the corresponding infrastructure hosts. For example, navigate to `http://128.130.172.201:15672/#/queues` (replace the IP with the actual infrastructure host).
+
+Each communication link between two operators is represented by a single queue that is named according to the following schema:
+
+```
+128.130.172.201/source>step1
+```
+
+The first part represents the sending operator's VISP runtime IP. Separated by a slash follows the sending operator's ID. Finally, a *greater than* sign precedes the receiving operator's ID.
 
 
 # Fine tuning

@@ -49,32 +49,8 @@ docker run --net="host" -d --name mysql -e MYSQL_ROOT_PASSWORD=visp -e MYSQL_DAT
 
 # Configuration
 
-Before the VISP runtime can be executed, two configuration files must be modified
+Before the VISP runtime can be executed, two credentials files need to be configured:
 
-
-## Application Properties
-
-Similarly, the following configurations must be set in this file:
-
-<table class="table">
-  <thead>
-      <tr>
-          <th>Property</th>
-          <th>Value</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <th scope="row">visp.runtime.ip</th>
-          <td>Public IP address of the current VISP runtime instance (can be overriden during the docker deployment process)</td>
-      </tr>
-			<tr>
-					<th scope="row">visp.infrastructure.ip</th>
-					<td>IP address where the rabbitmq, mysql and redis server are accessible (as seen from the runtime process). This may be 127.0.0.1 if the runtime is deployed as a docker container on the same host where the other infrastructure components are running.</td>
-			</tr>
-
-  </tbody>
-</table>
 
 ## Credentials
 
@@ -164,10 +140,9 @@ The first command is used to log into your dockerhub account. Then the maven pro
 Once the image has been successfully pushed to the dockerhub repository, the following command can be used to run a docker container based on the pushed image:
 
 ```
-docker run --net="host" -e "VISP_RUNTIME_IP={runtime-ip}" -e "VISP_INFRASTRUCTURE_IP={infrastructure-ip}" -d --name vispruntime {dockerhub-username}/{dockerhub-repository}
+docker run --net="host" -d --name vispruntime {dockerhub-username}/{dockerhub-repository}
 ```
 
-Setting the IPs correctly is critical: `VISP_RUNTIME_IP` is the public IP of the VISP runtime. This is also the IP that is used in the configuration file to distinguish different runtimes. In practise, it is the IP of the OpenStack instance where the above command is executed. All the other IPs must be set to `127.0.0.1` if deployment is done via docker on OpenStack. The reasons is that OpenStack instances cannot access themselves by their own public IPs (at least in our version).
 
 # Running VISP from Source
 
@@ -193,7 +168,7 @@ mvn spring-boot:run
 
 ## Resource Pools
 
-Once the infrastructure host is up and running, a resource pool needs to be created. Resource pools are basically cloud computing instances where docker containers are executed. Open the web interface of the infrastructure host (`http://<visp.infrastructure.ip>:8080/`) and navigate to <b>Resource Pools</b>. Initially, there should be no entries. Create a new pool by clickin on the <b>Add new pooled VM</b> button and specify a name, an instance flavour and a cost. The name is an identifier and is also used in the topology config file to distinguish different pools on the same runtime instance. The flavour reflects the amount of computational resources available and basically limits how many operators can be deployed at the same time. The cost value is currently not used.
+Once the infrastructure host is up and running, a resource pool needs to be created. Resource pools are basically cloud computing instances where docker containers are executed. Open the web interface of the infrastructure host (`http://<infrastructureHoste>:8080/`) and navigate to <b>Resource Pools</b>. Initially, there should be no entries. Create a new pool by clickin on the <b>Add new pooled VM</b> button and specify a name, an instance flavour and a cost. The name is an identifier and is also used in the topology config file to distinguish different pools on the same runtime instance. The flavour reflects the amount of computational resources available and basically limits how many operators can be deployed at the same time. The cost value is currently not used.
 
 <div class="screenshot-holder">
 <a href="img/quickstart/resourcepools.png" data-title="Add new resource pool" data-toggle="lightbox"><img class="img-responsive" src="img/quickstart/resourcepools.png" alt="add new resource pool"></a>
@@ -202,7 +177,7 @@ Once the infrastructure host is up and running, a resource pool needs to be crea
 
 ## Deploy Topology
 
-Topology files are used to describe which processing nodes should be deployed and how they should be connected. In order to upload a topology file, navigate to the web interface of the infrastructure host (`http://<visp.infrastructure.ip>:8080/`) and select <b>Change Topology</b>. There you can upload a new topology file and see which topology is currently active. If the nodes should be deployed on multiple VISP runtime instances, just upload the topology on one runtime instance - VISP's distributed update process will take care of the rest and update the other runtime instances accordingly.
+Topology files are used to describe which processing nodes should be deployed and how they should be connected. In order to upload a topology file, navigate to the web interface of the infrastructure host (`http://<infrastructureHoste>:8080/`) and select <b>Change Topology</b>. There you can upload a new topology file and see which topology is currently active. If the nodes should be deployed on multiple VISP runtime instances, just upload the topology on one runtime instance - VISP's distributed update process will take care of the rest and update the other runtime instances accordingly.
 
 Here are two example topology files: <a href="./files/scenario1.txt">scenario1</a> and <a href="./files/scenario2.txt">scenario2</a>.
 
@@ -267,3 +242,6 @@ The first part represents the sending operator's VISP runtime IP. Separated by a
 # Fine tuning
 
 TBD: discuss all other attributes in application.properties as well as in the configuration menue
+
+Setting the IPs correctly is critical: `VISP_RUNTIME_IP` is the public IP of the VISP runtime. This is also the IP that is used in the configuration file to distinguish different runtimes. In practise, it is the IP of the OpenStack instance where the above command is executed. All the other IPs must be set to `127.0.0.1` if deployment is done via docker on OpenStack. The reasons is that OpenStack instances cannot access themselves by their own public IPs (at least in our version).
+

@@ -41,8 +41,8 @@ $source = Source() {
 }
 
 $step1 = Operator($source) {
-  allowedLocations = 192.168.0.1/openstackpool 192.168.0.1/openstackpool 192.168.0.3/openstackpool 192.168.0.4/openstackpool 192.168.0.5/openstackpool,
-  concreteLocation = 192.168.0.1/openstackpool,
+  allowedLocations = 192.168.0.1/openstackpool 192.168.0.2/* 192.168.0.3/awsCloud 192.168.0.4/fogPool 192.168.0.5/openstackpool,
+  concreteLocation = 192.168.0.2/openstackpool2,
   inputFormat      = step1,
   type             = step1,
   outputFormat     = step2,
@@ -102,13 +102,21 @@ Queue threshold
 
 ### Locations
 
-Each node is deployed in one or more locations. A location is uniquely specified by an infrastructure host and a resource pool. The first is responsible for routing the data stream inputs while the second is the identifier of the (cloud) resource pool where the operator is actually executed.
+Each node is deployed in one or more locations. A location is uniquely specified by an infrastructure host and a resource pool. The first is responsible for routing the data stream inputs while the second is the identifier of the (cloud) resource pool where the operator is actually executed. An infrastructure host can have an arbitrary number of resource pools. Each resource pool belongs to exactly one infrastructure host. Two different infrastructure hosts can have resource pools with the same identifier; however, they still refer to different actual pools.
+
+If a start (&lowast;) is used instead of a concrete resource pool name, the VISP instance will automatically pick one of the available resource pools to deploy the container.
 
 
 # Processing Nodes
 
-TBD
+Processing nodes are the building blocks performing the actual useful work in a topology. Each processing node has a type and a unique identifier. There may be more than one processing node of the same type (but they must have different identifiers then). Processing nodes have arbitrary many input sources (other processing nodes) and can in turn forward their output to arbitrarily many (child) processing nodes.
+
+A processing node is implemented as a docker image. Whenever a node is instantiated by the VISP runtime, a docker container is created from that docker image on (one of) the specified resource pool(s).
+
+TODO (Christoph): explain how a processing node must be implemented in that docker image
+
+The VISP runtime may decide to replicate a processing node at runtime; this means that more than one docker container is deployed from the same docker image. The reason for this replication is to have more copies of the same processing nodes in order to partition the input data and divide the work between all the replicas.
 
 # Data Provider
 
-TBD
+While in a real scenario, the input data would come from some device, a sensor or some other data source, the VISP Data Provider can be used to generate a stream of test data to evaluate the created topology. A few different types of such data streams are already implemented (e.g. MachineData, SequentialWait, ...) and for those one just has to point the data provider to the infrastructure host and resource pool.

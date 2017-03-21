@@ -49,7 +49,7 @@ docker run --net="host" -d --name mysql -e MYSQL_ROOT_PASSWORD=visp -e MYSQL_DAT
 
 # Configuration
 
-Before the VISP runtime can be executed, two credentials files need to be configured:
+Before the VISP runtime can be executed, the following configuration is necessary:
 
 
 ## Credentials
@@ -107,6 +107,10 @@ Make a copy of the `credential.sample.properties` file and name it `credential.p
 
 The spring credentials for the database and rabbitmq can be kept the same if no changes were made during the container deployment process in the setup of the infrastructure host.
 
+## Database IP
+
+Just in case the VISP Runtime is executed on a host *different* from the host where rabbitmq and MySQL are running, it is possible to specify the database IP manually. This is possible by creating a `database.properties` file in the application root that contains the IP of the host where the MySQL server is running.
+
 # Run VISP
 
 The easiest way to run VISP is by using a docker image.
@@ -153,22 +157,11 @@ mvn spring-boot:run
 ```
 
 
-# Configure Resource Pools
-
-<!--
-# Run VISP
-
-```
-mvn spring-boot:run
-```
--->
-
-
 # Setup VISP
 
-## Resource Pools
+## Creating Resource Pools
 
-Once the infrastructure host is up and running, a resource pool needs to be created. Resource pools are basically cloud computing instances where docker containers are executed. Open the web interface of the infrastructure host (`http://<infrastructureHoste>:8080/`) and navigate to <b>Resource Pools</b>. Initially, there should be no entries. Create a new pool by clickin on the <b>Add new pooled VM</b> button and specify a name, an instance flavour and a cost. The name is an identifier and is also used in the topology config file to distinguish different pools on the same runtime instance. The flavour reflects the amount of computational resources available and basically limits how many operators can be deployed at the same time. The cost value is currently not used.
+Once the infrastructure host is up and running, a resource pool needs to be created. Resource pools are basically cloud computing instances where docker containers are executed. Open the web interface of the infrastructure host (`http://<infrastructureHost>:8080/`) and navigate to <b>Resource Pools</b>. Initially, there should be no entries. Create a new pool by clickin on the <b>Add new pooled VM</b> button and specify a name, an instance flavour and a cost. The name is an identifier and is also used in the topology config file to distinguish different pools on the same runtime instance. The flavour reflects the amount of computational resources available and basically limits how many operators can be deployed at the same time. The cost value is currently not used.
 
 <div class="screenshot-holder">
 <a href="img/quickstart/resourcepools.png" data-title="Add new resource pool" data-toggle="lightbox"><img class="img-responsive" src="img/quickstart/resourcepools.png" alt="add new resource pool"></a>
@@ -199,7 +192,7 @@ In order to evaluate whether the set up topology is actually working properly, w
 <div class="section-block">
 You can download the source code from Github: <br /><br />
 
-	<a class="btn btn-primary btn-cta" href="https://github.com/visp-streaming/dataProvider" target="_blank">
+	<a class="btn btn-primary btn-cta" href="https://github.com/visp-streaming/dataProvider">
 	<i class="fa fa-cloud-download"></i> VISP Data Provider</a>
 </div>
 
@@ -215,6 +208,11 @@ mvn spring-boot:run
 
 Before the data stream can be started, the configuration has to be adapted. Navigate to the VISP Data Provider web interface: `http://localhost:8090/`
 
+There, enter the public URI of the VISP Runtime where the target source operator is located. E.g., if the source that should be addressed is deployed at a VISP runtime `128.130.172.222`, enter that IP.
+
+Username and password are the credentials for the rabbitmq server that were set during the docker deployment of the infrastructure host.
+
+Once the credentials are configured, navigate to *Create Task*, pick a template (e.g. SequentialWait) and specify the frequency and number of iterations. The template decides which queue is targeted and what kind of data is sent.
 
 <div class="screenshot-holder">
 <a href="img/quickstart/dataprovider.png" data-title="Configure Data Provider" data-toggle="lightbox"><img class="img-responsive" src="img/quickstart/dataprovider.png" alt="Configure Data Provider"></a>
@@ -222,9 +220,8 @@ Before the data stream can be started, the configuration has to be adapted. Navi
 </div>
 
 
-There, enter the public URI of the VISP Runtime where the target source operator is located. E.g., if the source that should be addressed is deployed at a VISP runtime `128.130.172.222`, enter that IP.
 
-Username and password are the credentials for the rabbitmq server that were set during the docker deployment of the infrastructure host.
+
 
 ## Observe the Data Processing
 
@@ -243,5 +240,4 @@ The first part represents the sending operator's VISP runtime IP. Separated by a
 
 TBD: discuss all other attributes in application.properties as well as in the configuration menue
 
-Setting the IPs correctly is critical: `VISP_RUNTIME_IP` is the public IP of the VISP runtime. This is also the IP that is used in the configuration file to distinguish different runtimes. In practise, it is the IP of the OpenStack instance where the above command is executed. All the other IPs must be set to `127.0.0.1` if deployment is done via docker on OpenStack. The reasons is that OpenStack instances cannot access themselves by their own public IPs (at least in our version).
-
+<!--Setting the IPs correctly is critical: `VISP_RUNTIME_IP` is the public IP of the VISP runtime. This is also the IP that is used in the configuration file to distinguish different runtimes. In practise, it is the IP of the OpenStack instance where the above command is executed. All the other IPs must be set to `127.0.0.1` if deployment is done via docker on OpenStack. The reasons is that OpenStack instances cannot access themselves by their own public IPs (at least in our version).-->

@@ -77,9 +77,9 @@ In curly braces, the following options can be specified:
 * `concreteLocation`<br />
 Location (rabbitmq host, resource pool) where the operator should be deployed<br /><br />
 * `allowedLocations`<br />
-List of locations where the operator can be deployed (a concrete location is picked from this list if none is explicitly provided)<br /><br />
+List of locations where the operator can be deployed (a concrete location is picked from this list if none is explicitly provided). Each location is separated from the next one with a single space. <br /><br />
 * `type`<br />
-<br /><br />
+<br />The type is an identifier for the abstract node function<br />
 * `inputFormat`<br />
 Which kinds of input format are expected<br /><br />
 * `outputFormat`<br />
@@ -116,6 +116,30 @@ A processing node is implemented as a docker image. Whenever a node is instantia
 TODO (Christoph): explain how a processing node must be implemented in that docker image
 
 The VISP runtime may decide to replicate a processing node at runtime; this means that more than one docker container is deployed from the same docker image. The reason for this replication is to have more copies of the same processing nodes in order to partition the input data and divide the work between all the replicas.
+
+## Update mechanism
+
+One interesting implementation detail concerns the way the running containers are handled in case of a topology update. Imagine A topology consisting of a source node *Source*, a processing operator *Step1* and a sink node *Sink*. The following figure displays such a topology.
+
+<div class="screenshot-holder">
+<a href="img/quickstart/topology_example1.png" data-title="Configure Data Provider" data-toggle="lightbox"><img class="img-responsive" src="img/quickstart/topology_example1.png" alt="Configure Data Provider"></a>
+<a class="mask" href="img/quickstart/topology_example1.png" data-title="Configure Data Provider" data-toggle="lightbox"><i class="icon fa fa-search-plus"></i></a>
+</div>
+
+Initially, *Step1* is set up to connect to *Source*'s queue and handle messages that are put on that queue (its identifier would be **192.168.0.1/Source>Step1**). Now, let's assume the topology is changed such that a new operator *Step2* is inserted that consumes from *Source*. Also, *Step1* is changed so that it now receives messages from both *Source* **and** *Step2* (as seen in the following figure):
+
+<div class="screenshot-holder">
+<a href="img/quickstart/topology_example2.png" data-title="Configure Data Provider" data-toggle="lightbox"><img class="img-responsive" src="img/quickstart/topology_example2.png" alt="Configure Data Provider"></a>
+<a class="mask" href="img/quickstart/topology_example2.png" data-title="Configure Data Provider" data-toggle="lightbox"><i class="icon fa fa-search-plus"></i></a>
+</div>
+
+While it is easy to set up a new instance for Step2 and point it to the correct queue (**192.168.0.1/Source>Step2**) on setup, it is a little bit more tricky to change *Step1*. Ultimately, it needs to listen to both **192.168.0.1/Source>Step1** and **192.168.0.1/Step2>Step1**. In order to communicate this change to the container *without interrupt the current processing*, the following mechanism is used:
+
+* Write an update command to a specific file inside the docker container (<code>/root/topologyUpdate.txt</code>).
+* This update command to update *Step1* in our example would be: <code>ADD 192.168.0.1/Step2>Step1</code>
+* The docker container has a thread that automatically scans the file system for the addition of new files
+* Once this threads notices the new file, its content is read and the appropriate update is executed
+* In this case, a new connection to the queue **192.168.0.1/Step2>Step1** is created and the docker container will now listen to messages coming from that queue.
 
 # Data Provider
 

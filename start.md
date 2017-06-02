@@ -49,7 +49,7 @@ docker run --net="host" -d --name mysql -e MYSQL_ROOT_PASSWORD=visp -e MYSQL_DAT
 
 # Configuration
 
-Before the VISP runtime can be executed, the following configuration is necessary:
+Before the VISP runtime can be executed, the following configuration is necessary, which can be found in the folder `runtimeConfiguration":
 
 
 ## Credentials
@@ -109,7 +109,10 @@ The spring credentials for the database and rabbitmq can be kept the same if no 
 
 ## Database IP
 
-Just in case the VISP Runtime is executed on a host *different* from the host where rabbitmq and MySQL are running, it is possible to specify the database IP manually. This is possible by creating a `database.properties` file in the application root that contains the IP of the host where the MySQL server is running.
+Just in case the VISP Runtime is executed on a host *different* from where the runtime is running, it is possible to specify the database IP manually. This is possible by creating a `database.properties` file in the application root that contains the IP of the host where the MySQL server is running.
+
+## Operator Configuration
+In order to configure the resource requirements of the individual operators, it is required to define them in the `operatorConfiguration.json` file.
 
 # Run VISP
 

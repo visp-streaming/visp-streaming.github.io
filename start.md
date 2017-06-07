@@ -131,20 +131,25 @@ In order to generate a docker image for the runtime, use this maven command (imp
 
 ```
 docker login
-mvn clean package docker:build -DpushImage -Dmaven.test.skip=true
 ```
 
 The first command is used to log into your dockerhub account. Then the maven project is built and pushed to the dockerhub repository specified in pom.xml. Change this to your own repository by modifying the pom.xml:
 
 ```
 <configuration>
-  <useConfigFile>true</useConfigFile>
-  <imageName>{dockerhub-username}/{dockerhub-repository}</imageName>
-...
+	<repository>{dockerhub-username}/{dockerhub-repository}</repository>
+	<tag>latest</tag>
 </configuration>
 ```
 
-Once the image has been successfully pushed to the dockerhub repository, the following command can be used to run a docker container based on the pushed image:
+
+Then you can build the container with the folloging command:
+
+```
+mvn install
+```
+
+Once the image has been successfully built (and optionally pushed to a docker repository, the following command can be used to run a docker container:
 
 ```
 docker run --net="host" -d --name vispruntime {dockerhub-username}/{dockerhub-repository}

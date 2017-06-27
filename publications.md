@@ -7,7 +7,26 @@ layout: publications
 
 <div class="panel panel-default">
   <div class="panel-body">
-Hochreiner, Christoph. "VISP Testbed-A Toolkit for Modeling and Evaluating Resource Provisioning Algorithms for Stream Processing Applications." ZEUS 2017, pp. NN-NN.
+Michael Borkowski, Christoph Hochreiner and Stefan Schulte. "Moderated Resource Elasticity for Stream Processing Applications." International Workshop on Autonomic Solutions for Parallel and Distributed Data Stream Processing (Auto-DaSP 2017) at 23rd International European Conference on Parallel and Distributed Computing (Euro-Par 2017), pp. NN-NN.
+</div>
+  <div class="panel-footer text-center ">
+  <div class="btn-group" role="group" >
+  <!--<button type="button" class="btn btn-default">
+  <a href="http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/2017_ZEUS.pdf">
+  <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Paper </a></button>
+  <button type="button" class="btn btn-default">
+  <a href="https://speakerdeck.com/chochreiner/visp-testbed-a-toolkit-for-modeling-and-evaluating-resource-provisioning-algorithms-for-stream-processing-applications"> 
+  <span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Presentation</a></button>-->
+  <button type="button" class="btn btn-default">
+  <a href="http://www.infosys.tuwien.ac.at/staff/hochreiner/publications/bibtex/borkowski2017autodasp.bib"> 
+  <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Bibtex</a></button>
+</div>
+</div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+Hochreiner, Christoph. "VISP Testbed-A Toolkit for Modeling and Evaluating Resource Provisioning Algorithms for Stream Processing Applications." ZEUS 2017, pp. 37-43.
 </div>
   <div class="panel-footer text-center ">
   <div class="btn-group" role="group" >

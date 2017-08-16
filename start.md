@@ -42,9 +42,9 @@ docker run --net="host" -d --name rabbitmq -e RABBITMQ_DEFAULT_USER=visp -e RABB
 ```
 
 
-### Start MySQL
+### Start MariaDB
 ```
-docker run --net="host" -d --name mysql -e MYSQL_ROOT_PASSWORD=visp -e MYSQL_DATABASE=visp -p 3306:3306 mysql
+docker run --net="host" -d --name mysql -e MYSQL_ROOT_PASSWORD=visp -e MYSQL_DATABASE=visp -p 3306:3306 mariadb
 ```
 
 # Configuration

@@ -243,9 +243,3 @@ Each communication link between two operators is represented by a single queue t
 
 The first part represents the sending operator's VISP runtime IP. Separated by a slash follows the sending operator's ID. Finally, a *greater than* sign precedes the receiving operator's ID.
 
-
-# Fine tuning
-
-TBD: discuss all other attributes in application.properties as well as in the configuration menue
-
-<!--Setting the IPs correctly is critical: `VISP_RUNTIME_IP` is the public IP of the VISP runtime. This is also the IP that is used in the configuration file to distinguish different runtimes. In practise, it is the IP of the OpenStack instance where the above command is executed. All the other IPs must be set to `127.0.0.1` if deployment is done via docker on OpenStack. The reasons is that OpenStack instances cannot access themselves by their own public IPs (at least in our version).-->

@@ -5,25 +5,7 @@ layout: components
 The VISP Ecosystem consists of two major components: the VISP Marketplace and the VISP Runtime. The VISP Marketplace aims at creating an ecosystem for IoT-based topologies by minimizing the required effort for the user to design a topology. The VISP Runtime complements the VISP Marketplace, by providing a platform to execute the previously designed topologies.
 
 # Architecture
-
-TBD
-
-
-# Runtime
-
-TBD
-
-## Web GUI
-
-TBD
-
-## Resource Provider
-
-TBD
-
-## Reasoner
-
-TBD
+The VISP Ecosystem provides a platform to implement stream processing topologies, which covers different aspects ranging from the topology configuration to resource provisioning aspects.
 
 ## Topology Parser
 
@@ -141,6 +123,20 @@ While it is easy to set up a new instance for Step2 and point it to the correct 
 * Once this threads notices the new file, its content is read and the appropriate update is executed
 * In this case, a new connection to the queue **192.168.0.1/Step2>Step1** is created and the docker container will now listen to messages coming from that queue.
 
+
+
+## Resource Provider
+
+The VISP Runtime is able to either work on a fixed set of virtual machines or to obtain the virtual machines on demand within a OpenStack-based cloud.
+
+## Reasoner
+
+The reasoner component allows the VISP Runtime to update the resource provisioning configuration on demand. 
+Currently, VISP only provides a threshold based approach, but in the future we will also implement more advance provisioning approaches.
+
+
 # Data Provider
 
 While in a real scenario, the input data would come from some device, a sensor or some other data source, the VISP Data Provider can be used to generate a stream of test data to evaluate the created topology. A few different types of such data streams are already implemented (e.g. MachineData, SequentialWait, ...) and for those one just has to point the data provider to the infrastructure host and resource pool.
+
+
